@@ -1,9 +1,16 @@
+import { Injectable } from '@nestjs/common';
 import { createHash } from 'crypto';
 import { Tracker } from '../tracker.interface';
 import { TrackerRepository } from '../tracker.repository';
 
+@Injectable()
 export class TrackerInMemoryRepository implements TrackerRepository {
-  private readonly trackers = {};
+  private readonly trackers = {
+    testRun123: {
+      id: 'testRun123',
+      timeStarted: 1626726079671,
+    },
+  };
   findOne(id: string): Tracker | null {
     return this.trackers[id] ?? null;
   }

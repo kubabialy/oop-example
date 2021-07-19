@@ -23,8 +23,8 @@ export class TrackerController {
   }
 
   @Post()
-  store(): void {
-    this.trackerService.store();
+  store(): string {
+    return this.trackerService.store();
   }
 
   @Post(':id/done')

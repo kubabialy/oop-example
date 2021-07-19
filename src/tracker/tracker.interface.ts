@@ -3,3 +3,5 @@ export interface Tracker {
   timeStarted: number;
   timeFinished?: number;
 }
+
+export type TrackerInterface = Tracker;

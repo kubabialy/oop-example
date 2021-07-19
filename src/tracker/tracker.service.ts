@@ -1,16 +1,21 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, Inject } from '@nestjs/common';
 import { Tracker } from './tracker.interface';
 import { TrackerRepository } from './tracker.repository';
 
 export class TrackerService {
-  constructor(private trackerRepository: TrackerRepository) {}
+  constructor(
+    @Inject('TrackerRepository') private trackerRepository: TrackerRepository,
+  ) {}
   findOne(id: string): Tracker | null {
     return this.trackerRepository.findOne(id);
   }
-  store(): void {
-    this.trackerRepository.store({
+  store(): string {
+    const tracker: Tracker = {
       timeStarted: Date.now(),
-    });
+    };
+    this.trackerRepository.store(tracker);
+
+    return tracker.id!;
   }
 
   markAsDone(id: string): void {
